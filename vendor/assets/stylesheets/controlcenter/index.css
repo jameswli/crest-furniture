@@ -1,0 +1,356 @@
+body {
+  background: #ddd;
+  font-family: arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+}
+a img {
+  border: 0;
+}
+
+/* header styling */
+#header {
+  background: #36393d;
+  color: #fff;
+  height: 70px;
+}
+#header h1 a {
+  text-decoration: none;
+}
+#header h1 {
+  font-size: 30px;
+  line-height: 70px;
+  margin: 0;
+  padding: 0 0 0 20px;
+}
+#header #header_links {
+  font-size: small;
+  margin: -65px 15px 0 0;
+  padding: 0;
+  list-style-type: none;
+  text-align: right;
+  float: right;
+}
+#header #header_links li {
+  float: left;
+  margin: 0 0 0 5px;
+}
+#header #header_links a {
+  color: white;
+}
+#header #header_links a:hover {
+  color: #36393d;
+  background: #fff;
+  text-decoration: none;
+}
+
+/* primary tabsigation styling */
+#tabs {
+  clear: both;
+  float: right;
+  margin: -27px 5px 0 0;
+  list-style-type: none;
+  font-weight: bold;
+  font-size: small;
+}
+#tabs li {
+  float: left;
+  height: 27px;
+  line-height: 27px;
+  padding: 0 10px;
+}
+#tabs li.active {
+  background: #ddd;
+}
+#tabs li.active a {
+  color: #000;
+}
+#tabs a {
+   text-decoration: none;
+   padding: 3px;
+   color: #fff;
+}
+#tabs a:hover {
+  text-decoration: underline;
+}
+
+/* secondary tabsigation styling */
+#sub_tabs {
+  clear: both;
+  float: left;
+  list-style-type: none;
+  font-weight: bold;
+  font-size: small;
+  margin: 13px 0 0 -15px;
+}
+#sub_tabs li {
+  float: left;
+  height: 27px;
+  line-height: 27px;
+  padding: 0 10px;
+  margin-right: 7px;
+}
+#sub_tabs li.active {
+  background: #fff;
+}
+#sub_tabs li.active a {
+  color: #000;
+}
+#sub_tabs a {
+   text-decoration: none;
+   padding: 3px;
+   color: #fff;
+}
+#sub_tabs a:hover {
+  text-decoration: underline;
+}
+
+/* main content styling */
+h2 {
+  padding: 5px;
+  margin: 15px 0px;
+}
+#main {
+  min-width: 800px;
+}
+#content {
+  clear: both;
+}
+#content_inside {
+  padding: 5px 10px 10px 10px;
+  margin: 0 10px 10px 10px;
+  background: #fff;
+  border-right: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
+  min-width: 800px;
+}
+
+#content.narrow {
+  float: left;
+  width: 70%;
+}
+#content.narrow #content_inside {
+  min-width: 560px;
+}
+
+#sidebar {
+  float: left;
+  width: 30%;
+}
+#sidebar_inside {
+  min-width: 240px;
+  margin: 0 10px 0 0;
+}
+.sidebar_box {
+  border-bottom: 2px solid #ccc;
+}
+
+/* style for forms */
+form {
+  margin: 20px 0;
+  width: 100%;
+}
+form div {
+  clear: both;
+  float: left;
+  margin-bottom: 6px;
+}
+form div div.col2 {
+  width: 200px;
+  float: left;
+  margin: 0 20px 0 0;
+  clear: none;
+}
+label {
+  display: block;
+}
+fieldset {
+  border: 0;
+  border-top: 1px solid #ddd;
+  clear: both;
+  padding: 0.8em 0 0 0;
+}
+fieldset legend {
+  font-weight: bold;
+  margin: 0 0 0 10px;
+  font-size: 1.2em;
+}
+textarea {
+  margin: 0;
+}
+input[type="submit"] {
+  margin-top: 20px;
+}
+form div.submit {
+  clear: both;
+  float: none;
+}
+
+/* styling for errors (may not be used in many cases) */
+.errorExplanation {
+  border: 2px solid #c00;
+  margin-bottom: 8px;
+  width: 100%;
+}
+.errorExplanation h2 {
+  float: none;
+  background: #c00;
+  margin: 0;
+  color: #fff;
+  padding: 3px;
+  font-size: large;
+}
+.errorExplanation p {
+  padding: 3px;
+  margin: 3px 0;
+}
+.fieldWithErrors {
+  display: inline;
+  margin: 0; padding: 0;
+}
+.fieldWithErrors label {
+  color: #c00;
+}
+
+/* style for tables that are used as reports */
+table {
+	border-collapse: collapse;
+	margin-bottom: 30px;
+}
+table thead tr {
+	border-bottom: 0;
+}
+table thead th {
+  text-align: left;
+}
+table tbody th {
+  text-align: left;
+  vertical-align: top;
+}
+table tbody td {
+  padding: 2px 10px;
+  vertical-align: top;
+}
+
+/* makes something 100% width */
+.wide {
+  width: 100%;
+}
+
+/* style for pagination */
+.paging_full_numbers {
+  padding: 3px;
+  margin: 15px 3px 3px 3px;
+}
+.paging_full_numbers .paginate_button {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  border: 1px solid #aaaadd;
+  text-decoration: none;
+  color: #36393d;
+}
+.paging_full_numbers .paginate_button:hover, .paging_full_numbers .paginate_button:active {
+  border: 1px solid #36393d;
+  color: #000;
+}
+.paging_full_numbers .paginate_active {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  border: 1px solid #36393d;
+  font-weight: bold;
+  background-color: #36393d;
+  color: #FFF;
+}
+.paging_full_numbers .paginate_button_disabled, 
+.paging_full_numbers .paginate_button_disabled:hover, 
+.paging_full_numbers .paginate_button_disabled:active {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  border: 1px solid #eee;
+  color: #ddd;
+}
+
+/* styles for flashed messages and errors */
+#message, #flash_message, #notice, #flash_notice, #success, #flash_success {
+  background: #ff8;
+  font-weight: bold;
+  padding: 5px 20px;
+  margin-top: 10px;
+}
+#error, #flash_error, #flash_alert {
+  background: #c00;
+  font-weight: bold;
+  color: #fff;
+  padding: 5px 20px;
+  margin-top: 10px;
+}
+
+ /* Styles for #show page columns */
+ 
+.col-container {
+  float: left;
+  width: 100%;
+  display: block;
+  clear: none;
+  margin: 0px;
+  padding: 0px 0px 0px 5px;
+}
+.col-left {
+  float: left;
+  width: 49%;
+  display: block;
+  clear: none;
+  margin: 0px 0px 15px 0px;
+  border: 0px;
+  padding: 0px;
+}
+.col-right {
+  float: right;
+  width: 49%;
+  display: block;
+  clear: none;
+  margin: 0px 0px 15px 0px;
+  border: 0px;
+  padding: 0px;
+}
+.display-col {
+  margin: 0px;
+  border-top: 1px solid #EEE;
+  border-right: 1px solid #DDD;
+  border-bottom: 1px solid #DDD;
+  border-left: 1px solid #EEE;
+  padding: 0px 10px 15px 10px;
+  float: none; /* corrects behavior in forms */
+}
+.display-col table {
+  margin: 0px;
+}
+.display-col .key {
+  font-weight: bold;
+}
+.display-col .positive {
+  font-weight: bold;
+  color: green;
+}
+.display-col .neutral {
+  font-weight: bold;
+  color: black;
+}
+.display-col .negative {
+  font-weight: bold;
+  color: red;
+}
+.display-col td.freeform {
+  width: 95%;
+}
+.display-col p.freeform {
+  width: 95%;
+  min-height: 30px;
+  background-color: #EEE;
+  margin: 0px;
+  padding: 5px;
+}
+.display-col table tbody td {
+  padding: 2px 20px 0px 0px;
+}

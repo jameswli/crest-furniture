@@ -1,0 +1,11 @@
+<% title "Edit Style" %>
+<% select_tab "Inventory" %>
+<% select_sub_tab "Edit Style" %>
+
+<% sub_tabs do %>
+	<%= sub_tab "Display Style", inventory_style_path(@style) %>
+	<%= sub_tab "Edit Style", edit_inventory_style_path(@style) %>
+	<%= sub_tab "All Styles", inventory_styles_path %>
+<% end %> 
+
+<%= render 'form' %>

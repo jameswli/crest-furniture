@@ -1,0 +1,10 @@
+<% title "New User" %>
+<% select_tab "Users" %>
+<% select_sub_tab "New User" %>
+
+<% sub_tabs do %>
+	<%= sub_tab "All Users", users_path %>
+	<%= sub_tab "New User", new_user_path %>
+<% end %> 
+
+<%= render 'form' %>

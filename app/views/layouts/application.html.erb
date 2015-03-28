@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title><%= CONTROL_CENTER_APP_TITLE %> - <%= @control_center_title %></title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <style type="text/css">
+      #header { background: <%= CONTROL_CENTER_THEME_COLOR %>; }
+      #sub_tabs li {background-color: <%= CONTROL_CENTER_THEME_COLOR %>; }
+      .pagination span.current { background: <%= CONTROL_CENTER_THEME_COLOR %>; }
+    </style>
+  </head>
+  <body>
+    <div id="header">
+      <h1><%= CONTROL_CENTER_APP_TITLE %></h1>
+      <ul id="header_links">
+        <%= render :partial => "layouts/header_links" %>
+      </ul>
+    </div>
+    <ul id="tabs">
+      <%= render :partial => "layouts/tabs" %>
+    </ul>
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+    <% end %>
+    <ul id="sub_tabs" <%= "class=\"narrow\"" if sidebar? %>>
+      <%= yield :sub_tabs %>
+    </ul>
+    <div id="main">
+      <div id="content" <%= "class=\"narrow\"" if sidebar? %>>
+        <div id="content_inside">
+          <h2><%= @control_center_title %></h2>
+          <%= yield %>
+        </div>
+      </div>
+      <% if sidebar? %>
+        <div id="sidebar">
+          <div id="sidebar_inside">
+            <%= yield :sidebar %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div style="display: none;" id="modal-overlay" class="modal-close"></div>
+  </body>
+</html>

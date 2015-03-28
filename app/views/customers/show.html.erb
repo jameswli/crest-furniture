@@ -1,0 +1,164 @@
+<% title @customer.name %>
+<% select_tab "Customers" %>
+<% select_sub_tab "Display Customer" %>
+
+<% sub_tabs do %>
+	<%= sub_tab "Display Customer", customer_path(@customer) %>
+	<%= sub_tab "Edit Customer", edit_customer_path(@customer) %>
+	<%= sub_tab "All Customers", customers_path %>
+<% end %>
+
+<div class="col-container">
+	<div class="col-left">
+		<div class="col-left">
+			<div class="display-col display-project" id="basics">
+				<h4>Basics</h4>
+				<table>
+					<tr>
+						<td class="key">Company</td>
+						<td><%= @customer.organization %></td>
+					</tr>
+					<tr>
+						<td class="key">Email</td>
+						<td><%= @customer.email %></td>
+					</tr>
+					<tr>
+						<td class="key">Telephone</td>
+						<td><%= @customer.telephone %></td>
+					</tr>
+					<tr>
+						<td class="key">Cellphone</td>
+						<td><%= @customer.cellphone %></td>
+					</tr>
+					<tr>
+						<td class="key">Address</td>
+					</tr>
+					<tr>
+						<td><%= @customer.address_line_1 %></td>
+					</tr>
+					<tr>
+						<td><%= @customer.address_line_2 %></td>
+					</tr>
+					<tr>
+						<td><%= @customer.city %>, <%= @customer.state %> <%= @customer.zip_code %></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="col-right">
+			<div class="display-col display-project" id="attachments">
+				<h4>Map</h4>
+				<a href="http://maps.google.com/maps?q=<%=@location[0]%>,<%=@location[1]%>"><img src="https://maps.googleapis.com/maps/api/staticmap?center=<%=@location[0]%>,<%=@location[1]%>&zoom=11&size=200x200">
+				</a>
+			</div>
+		</div>
+		<div style="clear:both;"></div>
+		<!-- <div class="display-col display-project" id="timeline">
+			<h4>Customer Interactions</h4>
+			<% @customer.notes.each do |note| %>
+				<div class="timeline-item note">
+					<% if note.user == current_user %>
+						<div class="identify"><span>You</span> made a note:</div>
+						<div class="controls">
+							<a href="#" class="modal-link" name="edit-note-<%= note.id %>">Edit</a>
+							<%= link_to 'Delete', note, method: :delete, data: { confirm: 'Are you sure?'} %>
+						</div>
+						<div class="modal-box" name="edit-note-<%= note.id %>">
+							<%= form_for note do |f| %>
+								<%= f.text_area :body, rows: "8", cols: "80" %>
+								<%= f.submit %>
+								<%= button_tag "Cancel", :class => "modal-close", :type => "button" %>
+							<% end %>
+						</div>
+					<% else %>
+						<div class="identify"><span><%= note.user.name %></span> made a note:</div>
+					<% end %>
+					<div class="body"><%= raw Kramdown::Document.new(note.body).to_html %></div>
+					<div class="date"><%= note.created_at.to_s(:friendly) %></div>
+				</div>
+			<% end %>
+			<% @customer.emails.each do |email| %>
+				<div class="timeline-item note">
+						<div class="identify">Email from <span><%= email.from_address %></span></div>
+						<div class="controls">
+							<%= link_to 'Delete', email, method: :delete, data: { confirm: 'Are you sure?'} %>
+						</div>
+					<div class="body"><%= raw Kramdown::Document.new(email.body).to_html %></div>
+					<div class="date"><%= email.created_at.to_s(:friendly) %></div>
+				</div>
+			<% end %>	
+			<%= form_for @note do |f| %>
+				<%= f.text_area :body, rows: "6", cols: "80" %>
+				<%= f.hidden_field :customer_id, value: @customer.id %>
+				<%= f.submit %> 
+			<% end %>
+		</div> -->
+
+		<div class="display-col display-project" id="timeline">
+			<h4>Customer's Projects</h4>
+				<table style="width:100%;" border="1">
+				  <tr id="headers">
+				    <td>Name</td>
+				    <td>Type</td>
+				    <td>Stage</td>
+				    <td>Sale Delivery</td>
+				    <td>Rental Delivery</td>
+				    <td>Rental Pickup</td>
+				  </tr>
+				    <% @customer.projects.each do |project| %>
+				      <tr>
+				        <td><%= project.name %></td>
+				        <td><%= project.type %></td>
+				        <td><%= project.stage %></td>
+				        <td><%= project.sale_delivery %></td>
+				        <td><%= project.rental_delivery %></td>
+				        <td><%= project.rental_pickup %></td>
+				      </tr>
+				    <% end %>
+				</table>
+		</div>
+	</div>
+	<div class="col-right">
+		<div class="display-col display-project" id="timeline">
+			<h4>Customer Interactions</h4>
+			<% @customer.notes.each do |note| %>
+				<div class="timeline-item note">
+					<% if note.user == current_user %>
+						<div class="identify"><span>You</span> made a note:</div>
+						<div class="controls">
+							<a href="#" class="modal-link" name="edit-note-<%= note.id %>">Edit</a>
+							<%= link_to 'Delete', note, method: :delete, data: { confirm: 'Are you sure?'} %>
+						</div>
+						<div class="modal-box" name="edit-note-<%= note.id %>">
+							<%= form_for note do |f| %>
+								<%= f.text_area :body, rows: "8", cols: "80" %>
+								<%= f.submit %>
+								<%= button_tag "Cancel", :class => "modal-close", :type => "button" %>
+							<% end %>
+						</div>
+					<% else %>
+						<div class="identify"><span><%= note.user.name %></span> made a note:</div>
+					<% end %>
+					<div class="body"><%= raw Kramdown::Document.new(note.body).to_html %></div>
+					<div class="date"><%= note.created_at.to_s(:friendly) %></div>
+				</div>
+			<% end %>
+			<% @customer.emails.each do |email| %>
+				<div class="timeline-item note">
+						<div class="identify">Email from <span><%= email.from_address %></span></div>
+						<div class="controls">
+							<%= link_to 'Delete', email, method: :delete, data: { confirm: 'Are you sure?'} %>
+						</div>
+					<div class="body"><%= raw Kramdown::Document.new(email.body).to_html %></div>
+					<div class="date"><%= email.created_at.to_s(:friendly) %></div>
+				</div>
+			<% end %>	
+			<%= form_for @note do |f| %>
+				<%= f.text_area :body, rows: "6", cols: "80" %>
+				<%= f.hidden_field :customer_id, value: @customer.id %>
+				<%= f.submit %> 
+			<% end %>
+		</div> 
+	</div>
+</div>
+<div style="clear:both;"></div>

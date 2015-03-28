@@ -1,0 +1,10 @@
+<% title "New Project" %>
+<% select_tab "Projects" %>
+<% select_sub_tab "New Project" %>
+
+<% sub_tabs do %>
+  <%= sub_tab "All Projects", projects_path %>
+  <%= sub_tab "New Project", new_project_path %>
+<% end %>
+
+<%= render 'form' %>

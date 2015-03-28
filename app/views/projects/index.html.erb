@@ -1,0 +1,34 @@
+<% title "All Projects" %>
+<% select_tab "Projects" %>
+<% select_sub_tab "All Projects" %>
+
+<% sub_tabs do %>
+  <%= sub_tab "All Projects", projects_path %>
+  <%= sub_tab "New Project", new_project_path %>
+<% end %>
+
+<table style="width:100%;" border="1">
+  <tr id="headers">
+    <td>Name</td>
+    <td>Type</td>
+    <td>Customer</td>
+    <td>Stage</td>
+    <td>Sale Delivery</td>
+    <td>Rental Delivery</td>
+    <td>Rental Pickup</td>
+    <td colspan="3"></td>
+  </tr>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= project.name %></td>
+        <td><%= project.type %></td>
+        <td><%= project.stage %></td>
+        <td><%= project.sale_delivery %></td>
+        <td><%= project.rental_delivery %></td>
+        <td><%= project.rental_pickup %></td>
+        <td><%= link_to 'Show', project_path(project) %></td>
+        <td><%= link_to 'Edit', edit_project_path(project) %></td>
+        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+</table>

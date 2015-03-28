@@ -1,0 +1,2 @@
+module InventoryStyleHelper
+end

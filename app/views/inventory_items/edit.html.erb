@@ -1,0 +1,25 @@
+<% title "Edit Item" %>
+<% select_tab "Inventory" %>
+<% select_sub_tab "Edit Item" %>
+
+<% sub_tabs do %>
+	<%= sub_tab "Display Style", inventory_style_path(@style) %>
+	<%= sub_tab "Edit Style", edit_inventory_style_path(@style) %>
+	<%= sub_tab "Edit Item", inventory_items_path %>
+<% end %> 
+
+<%= form_for @item do |s| %>
+  <%= s.label :serial_number, :class => 'field required' %>
+  <%= s.text_field :serial_number %>
+  <br />
+  <%= s.label :condition, :class => 'field required' %>
+  <%= s.text_field :condition %>
+  <br />
+  <%= s.label :status, :class => 'field required' %>
+  <%= s.text_field :status %>
+  <br />
+  <%= s.label :inventory_style_id, :class => 'field required' %>
+  <%= s.text_field :inventory_style_id %>
+  <br />
+  <%= s.submit "Save", class: "btn btn-primary" %>
+<% end %>  

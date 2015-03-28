@@ -1,0 +1,41 @@
+<% title "All Inventory" %>
+<% select_tab "Inventory" %>
+<% select_sub_tab "All Inventory" %>
+
+<% sub_tabs do %>
+	<%= sub_tab "All Inventory", inventory_styles_path %>
+	<%= sub_tab "New Style", new_inventory_style_path %>
+<% end %>
+
+<table style = "width:100%;" border = "1">
+	<tr>
+		<th>Style</th>
+		<th>Color</td>
+		<th>Manufacturer</th>
+		<th>Model No.</th>
+		<th>Inventory</th>
+		<th>Checked Out</th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+	<% @styles.each do |style| %>
+	<tr>
+		<td><%= style.name %></td>
+		<td><%= style.color %></td>
+		<td><%= style.manufacturer %></td>
+		<td><%= style.model_number %></td>
+		<td><%= style.inventory_items.count %></td>
+		<td><%= style.inventory_items.where(status: "Checked Out").count %></td>
+		<% if session[:project_id].blank? %>
+			<td><%= image_tag "shopping-basket--plus-gray.png" %></td>
+		<% else %>
+			<td><%= link_to image_tag("shopping-basket--plus.png"), project_items_path(project_item: {project_id: session[:project_id], inventory_style_id: style.id}), method: :post %></td>
+		<% end %>
+		<td><%= link_to 'Show', inventory_style_path(style) %> </td>
+		<td><%= link_to 'Edit', edit_inventory_style_path(style) %> </td>
+		<td><%= link_to 'Delete', style, method: :delete,data: { confirm: 'Are you sure?' } %> </td>
+		</tr>
+	<% end %>
+</table>

@@ -1,0 +1,73 @@
+<% if @project.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+    <ul>
+      <% @project.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<script>
+  $(function() {
+    $( "#project_sale_delivery" ).datepicker({
+      dateFormat: "yy-mm-dd"
+    });
+  });
+  $(function() {
+    $( "#project_rental_delivery" ).datepicker({
+      dateFormat: "yy-mm-dd"
+    });
+  });
+  $(function() {
+    $( "#project_rental_pickup" ).datepicker({
+      dateFormat: "yy-mm-dd"
+    });
+  });
+</script>
+
+<%= form_for(@project) do |f| %>
+  <p>
+    <%= f.label :name, :class => 'field required' %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :type, :class => 'field required' %>
+    <%= f.select(:type, PROJECT_TYPES, selected: "Rental") %>
+  </p>
+  <p>
+    <! show only stages that the project type can be !>
+    <% if @project.type = "Rental" %>
+      <%= f.label :stage, :class => 'field required' %>
+      <%= f.select(:stage, RENTAL_PROJECT_STAGES, selected: "Pre-Design") %>
+    <% elsif @project.type = "Purchase" %>
+      <%= f.label :stage, :class => 'field required' %>
+      <%= f.select(:stage, PURCHASE_PROJECT_STAGES, selected: "Pre-Design") %>
+    <% elsif @project.type = "Purchase/Rental" %>
+      <%= f.label :stage, :class => 'field required' %>
+      <%= f.select(:stage, PURCHASE_RENTAL_PROJECT_STAGES, selected: "Pre-Design") %>
+    <% end %>
+  </p>
+  <p>
+    <%= f.label :customer_id, :class => 'field required' %>
+    <%= f.collection_select :customer_id, Customer.all, :id, :name_with_organization, prompt: "Select a customer" %>
+  </p>
+  <p>
+    <%= f.label :sale_delivery, :class => 'field required' %>
+    <%= f.date_field(:sale_delivery) %>
+  </p>
+  <p>
+    <%= f.label :rental_delivery, :class => 'field required' %>
+    <%= f.date_field(:rental_delivery) %>
+  </p>
+  <p>
+    <%= f.label :rental_pickup, :class => 'field required' %>
+    <%= f.date_field(:rental_pickup) %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+

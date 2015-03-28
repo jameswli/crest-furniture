@@ -1,0 +1,14 @@
+<% title @user.name %>
+<% select_tab "Users" %>
+<% select_sub_tab "Display User" %>
+
+<% sub_tabs do %>
+	<%= sub_tab "Display User", user_path(@user) %>
+	<%= sub_tab "Edit User", edit_user_path(@user) %>
+	<%= sub_tab "All Users", users_path %>
+<% end %> 
+
+<p>ID: <%= @user.id %> </p>
+<p>Name : <%= @user.name %> </p>
+<p>Email : <%= @user.email %> </p>
+<p>Role : <%= @user.role %> </p>

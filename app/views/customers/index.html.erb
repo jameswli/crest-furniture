@@ -1,0 +1,37 @@
+<% title "All Customers" %>
+<% select_tab "Customers" %>
+<% select_sub_tab "All Customers" %>
+
+<% sub_tabs do %>
+	<%= sub_tab "All Customers", customers_path %>
+	<%= sub_tab "New Customer", new_customer_path %>
+<% end %>
+
+<table style="width:100%;" border="1">
+	<tr id="headers">
+		<td>Name</td>
+		<td>Company</td>
+		<td>Email</td>
+		<td>Phone</td>
+		<td>Cell</td>
+		<td>Address</td>
+		<td>Created At</td>
+		<td>Updated At</td>
+		<td colspan="3"></td>
+	</tr>
+	<% @customers.each do |c| %>
+	<tr>
+		<td><%= c.name %></td>
+		<td><%= c.organization %></td>
+		<td><%= c.email %></td>
+		<td><%= c.telephone %></td>
+		<td><%= c.cellphone %></td>
+		<td><%= c.address_line_1 %> <%= c.address_line_2 %>, <%= c.city %>, <%= c.state %> <%= c.zip_code %></td>
+		<td><%= c.created_at %></td>
+		<td><%= c.updated_at %></td>
+		<td><%= link_to 'Show', c %></td>
+		<td><%= link_to 'Edit', edit_customer_path(c) %></td>
+		<td><%= link_to 'Delete', c, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	</tr>
+	<% end %>
+</table>

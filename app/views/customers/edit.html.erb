@@ -1,0 +1,11 @@
+<% title "Edit Customer" %>
+<% select_tab "Customers" %>
+<% select_sub_tab "Edit Customer" %>
+
+<% sub_tabs do %>
+	<%= sub_tab "Display Customer", customer_path(@customer) %>
+	<%= sub_tab "Edit Customer", edit_customer_path(@customer) %>
+	<%= sub_tab "All Customers", customers_path %>
+<% end %>
+
+<%= render 'form' %>

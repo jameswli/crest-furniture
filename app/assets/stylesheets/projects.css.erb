@@ -1,0 +1,163 @@
+/* Place all the styles related to the Projects controller here.
+   They will automatically be included in application.css. */
+
+/* attchments */
+.display-project#attachments table {
+	width: 100%;
+}
+
+.display-project#attachments td.option {
+	text-align: right;
+	padding-right: 0px;
+}
+
+a.modal-link#upload, a.modal-link#upload:visited {
+	text-align: right;
+	margin-top: 10px;
+	display: block;
+	color: blue;
+}
+
+.display-project#attachments form, .display-project#attachments input {
+	margin: 0px;
+}
+
+.display-project#attachments #attachment_file_attachment {
+	display: block;
+	margin-bottom: 20px;
+}
+
+/* note forms */
+.display-project#timeline .new_note {
+	margin-bottom: 0px;
+}
+
+.display-project#timeline .new_note textarea,
+.display-project#timeline .edit_note textarea {
+	display: block;
+}
+
+/* attachment icons */
+.display-project#attachments td a {
+	padding: 0px 0px 5px 20px;
+	background-repeat: no-repeat;
+	display: inline-block;
+	font-size: 14px;
+}
+.display-project#attachments td a.document-excel 		{ background-image: url(<%= image_url('attachment-icons/document-excel.png') 		%>)}
+.display-project#attachments td a.document-pdf 			{ background-image: url(<%= image_url('attachment-icons/document-pdf.png') 			%>)}
+.display-project#attachments td a.document-photoshop 	{ background-image: url(<%= image_url('attachment-icons/document-photoshop.png') 	%>)}
+.display-project#attachments td a.document-powerpoint 	{ background-image: url(<%= image_url('attachment-icons/document-powerpoint.png')	%>)}
+.display-project#attachments td a.document-text 		{ background-image: url(<%= image_url('attachment-icons/document-text.png') 		%>)}
+.display-project#attachments td a.document-word 		{ background-image: url(<%= image_url('attachment-icons/document-word.png') 		%>)}
+.display-project#attachments td a.document 				{ background-image: url(<%= image_url('attachment-icons/document.png') 				%>)}
+.display-project#attachments td a.image 				{ background-image: url(<%= image_url('attachment-icons/image.png') 				%>)}
+.display-project#attachments td a.delete-link {
+	display: inline-block;
+	padding: 0px;
+	font-size: 9px;
+	color: #000000;
+	font-style: italic;
+}
+
+/* timeline notes */
+.display-project#timeline .timeline-item {
+	background-color: #F5F5F5;
+	margin: 0px 0px 10px 0px;
+	padding: 10px;
+}
+
+.display-project#timeline .timeline-item .date {
+	color: #9C9C9C;
+	display: inline-block;
+}
+
+.display-project#timeline .timeline-item .controls {
+	background-color: #FFFF88;
+	padding: 2px;
+	display: inline-block;
+	float: right;
+}
+
+.display-project#timeline .timeline-item .identify {
+	color: #9C9C9C;
+	display: inline-block;
+	font-style: italic;
+}
+
+.display-project#timeline .timeline-item .identify span {
+	font-weight: bold;
+}
+
+/* items */
+.display-project#items .inventory-style {
+	background-color: #F5F5F5;
+	margin: 0px 0px 10px 0px;
+	padding: 10px;
+}
+
+.display-project#items .inventory-style .picture {
+	display: inline-block;
+	margin: 0px 10px 0px 0px;
+	width: 82px;
+	vertical-align: top;
+}
+
+.display-project#items .inventory-style .picture img {
+	max-width: 82px;
+	width: 100%;
+	height: auto;
+}
+
+.display-project#items .inventory-style .picture img.no-picture {
+	width: 32px;
+	background-color: #FFFFFF;
+	padding: 25px;
+}
+
+.display-project#items .inventory-style .data {
+	display: inline-block;
+	vertical-align: top;
+	margin: 10px 0px 0px 0px;
+}
+
+.display-project#items .inventory-style .data a {
+	display: block;
+	padding: 0px 0px 5px 0px;
+}
+
+.display-project#items .inventory-style .controls {
+	display: inline-block;
+	vertical-align: top;
+	width: 205px;
+	padding: 0px;
+	margin: 10px 0px 0px 0px;
+}
+
+.display-project#items .inventory-style .controls .button {
+	display: inline-block;
+	padding: 4px 3px 3px 4px;
+	margin: 0px 0px 5px 0px;
+	width: 94px;
+}
+
+.display-project#items .inventory-style .controls .button img {
+	margin: 0px 2px 0px 0px;
+}
+
+.display-project#items .inventory-style .controls .button a, 
+.display-project#items .inventory-style .controls .button a:visited {
+	vertical-align: 4px;
+	color: blue;
+}
+
+.display-project#items .inventory-style .controls .button:hover {
+	background: #DEDEDE;
+	padding: 3px 3px 3px 3px;
+	border-top: 1px solid #BBBBBB;
+	border-left: 1px solid #BBBBBB;
+}
+
+.display-project#items .details table {
+	min-width: 500px;
+}

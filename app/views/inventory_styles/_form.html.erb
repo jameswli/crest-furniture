@@ -1,0 +1,30 @@
+<% if @style.errors.any? %>
+  <div id="error_explanation">
+	<h2><%= pluralize(@style.errors.count, "error") %> prohibited this style from being saved </h2>
+	<ul>
+	<% @style.errors.full_messages.each do |msg| %>
+	<li> <%= msg %> </li>
+	<% end %>
+	</ul>
+  </div>
+<% end %>
+
+<%= form_for @style do |s| %>
+  <%= s.label :name, :class => 'field required' %>
+  <%= s.text_field :name %>
+  <br />
+  <%= s.label :manufacturer, :class => 'field required' %>
+  <%= s.text_field :manufacturer %>
+  <br />
+  <%= s.label :model_number, :class => 'field required' %>
+  <br />
+  <%= s.text_field :model_number %>
+  <br />
+  <%= s.label :color, :class => 'field required' %>
+  <%= s.text_field :color %>
+  <br />
+  <%= s.label :picture, :class => 'field required' %>
+  <%= s.file_field :picture %>
+  <br />
+  <%= s.submit "Save", class: "btn btn-primary" %>
+<% end %>  

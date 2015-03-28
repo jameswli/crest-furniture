@@ -1,0 +1,10 @@
+<% title "New Style" %>
+<% select_tab "Inventory" %>
+<% select_sub_tab "New Style" %>
+
+<% sub_tabs do %>
+	<%= sub_tab "All Styles", inventory_styles_path %>
+	<%= sub_tab "New Style", new_inventory_style_path %>
+<% end %>
+
+<%= render 'form' %>

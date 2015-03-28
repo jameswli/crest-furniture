@@ -1,0 +1,10 @@
+<% title "New Customer" %>
+<% select_tab "Customers" %>
+<% select_sub_tab "New Customer" %>
+
+<% sub_tabs do %>
+	<%= sub_tab "All Customers", customers_path %>
+	<%= sub_tab "New Customer", new_customer_path %>
+<% end %> 
+
+<%= render 'form' %>

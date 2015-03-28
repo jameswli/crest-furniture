@@ -1,0 +1,27 @@
+<% select_tab "Inventory" %>
+<% select_sub_tab "Display Style" %>
+
+<% sub_tabs do %>
+	<%= sub_tab "Display Style", inventory_style_path(@style, :id => @style.object_id) %>
+	<%= sub_tab "Add Item", new_inventory_item_path(@style) %>
+<% end %> 
+
+<table style = "width:100%;" border = "1">
+	<tr id = "headers" >
+		<td>Serial_Number </td>
+		<td>Condition </td>
+		<td>Status </td>
+		<td>Time_Rented </td>
+		<td colspan="3"></td>
+	</tr>
+	<% @items.each do |item| %>
+	<tr>
+		<td><%= item.serial_number %></td>
+		<td><%= item.condition %></td>
+		<td><%= item.status %></td>
+		<td><%= item.inventory_style_id %></td>
+		<td><%= link_to 'Edit', edit_inventory_item_path(item) %> </td>
+		<td><%= link_to 'Delete', item, method: :delete,data: { confirm: 'Are you sure?' } %> </td>
+	</tr>
+	<% end %>
+</table>

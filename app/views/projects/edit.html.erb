@@ -1,0 +1,10 @@
+<% title "Edit Project" %>
+<% select_tab "Projects" %>
+<% select_sub_tab "Edit Project" %>
+
+<% sub_tabs do %>
+  <%= sub_tab "Display Project", project_path(@project) %>
+  <%= sub_tab "Edit Project", edit_project_path(@project) %>
+<% end %>
+
+<%= render 'form' %>

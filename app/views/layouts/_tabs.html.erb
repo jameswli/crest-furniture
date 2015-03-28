@@ -1,0 +1,7 @@
+<% if session[:project_id] %>
+	<li><%= link_to image_tag("shopping-basket.png"), project_path(session[:project_id]), id: "basket" %></li>
+<% end %>
+<%= tab("Projects", projects_path) %>
+<%= tab("Customers", customers_path) %>
+<%= tab("Inventory", inventory_styles_path) %>
+<%= tab("Users", users_path) %>

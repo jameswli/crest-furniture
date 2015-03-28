@@ -1,0 +1,59 @@
+<% title @style.name %>
+<% select_tab "Inventory" %>
+<% select_sub_tab "Display Style" %>
+
+<% sub_tabs do %>
+	<%= sub_tab "Display Style", inventory_style_path(@style) %>
+	<%= sub_tab "Edit Style", edit_inventory_style_path(@style) %>
+	<%= sub_tab "All Styles", inventory_styles_path %>
+<% end %> 
+
+<style>
+#style-picture {
+	max-width: 200px;
+	width: 100%;
+	height: auto;
+}
+.style { float: left; }
+.items { float: right; }
+</style>
+
+<div class="content">
+            <div class = "style">
+				<p>Name : <%= @style.name %> </p>
+				<p>Manufacturer : <%= @style.manufacturer %> </p>
+				<p>Model Number : <%= @style.model_number %> </p>
+				<p>Color : <%= @style.color %> </p>
+				<p><%= image_tag @style.picture_url, id: "style-picture" %> </p>
+				<%= form_for @item do |s| %>
+					  <%= s.hidden_field :serial_number, value: InventoryItem.count %>
+					  <%= s.hidden_field :condition, value: "New" %>
+					  <%= s.hidden_field :status, value: "Checked In" %>
+					  <%= s.hidden_field :inventory_style_id %>
+					  <%= s.submit %>
+				<% end %>  
+			</div>
+           <div class = "items">
+				<table style = "width:800px;" border = "1">
+					<thead>
+						<tr>
+							<th>Serial_Number</th>
+							<th>Condition</th>
+							<th>Status</th>
+							<th>Project</th>
+							<th></th>
+						</tr>
+					</thead>
+					<% @style.inventory_items.each do |item| %>
+					<tr>
+						<td><%= item.serial_number %></td>
+						<td><%= item.condition %></td>
+						<td><%= item.status %></td>
+						<td><%= link_to(item.project.try(:name), item.project) if item.status == "Checked Out" %></td>
+						<td><%= link_to 'Edit', edit_inventory_item_path(item) %> </td>
+						</tr>
+					<% end %>
+				</table>
+			</div>    
+			<div style="clear:both;"></div>
+</div>

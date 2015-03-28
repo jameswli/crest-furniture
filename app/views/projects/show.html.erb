@@ -1,0 +1,194 @@
+<% title @project.name %>
+<% select_tab "Projects" %>
+<% select_sub_tab "Display Project" %>
+
+<% sub_tabs do %>
+  <%= sub_tab "Display Project", project_path(@project) %>
+  <%= sub_tab "Edit Project", edit_project_path(@project) %>
+<% end %>
+
+<div class="col-container">
+	<div class="col-left">
+		<div class="col-left">
+			<div class="display-col display-project" id="basics">
+				<h4>Basics</h4>
+				<table>
+					<tr>
+						<td class="key">Customer</td>
+						<td><%= @project.customer.try(:name) %></td>
+					</tr>
+					<tr>
+						<td class="key">Project Type</td>
+						<td><%= @project.type %></td>
+					</tr>
+					<tr>
+						<td class="key">Project Stage</td>
+						<td><%= @project.stage %></td>
+					</tr>
+					<% if @project.type != "Rental" %>
+						<tr>
+							<td class="key">Delivery Date (Sale)</td>
+							<td><%= @project.sale_delivery.to_s(:short_slash) %></td>
+						</tr>
+					<% end %>
+					<% if @project.type != "Sale" %>
+						<tr>
+							<td class="key">Delivery Date (Rental)</td>
+							<td><%= @project.rental_delivery.to_s(:short_slash) %></td>
+						</tr>
+						<tr>
+							<td class="key">Pick-up Date (Rental)</td>
+							<td><%= @project.rental_pickup.to_s(:short_slash) %></td>
+						</tr>
+					<% end %>
+				</table>
+			</div>
+		</div>
+		<div class="col-right">
+			<div class="display-col display-project" id="attachments">
+				<h4>Attachments</h4>
+				<table>
+					<% @project.attachments.each do |a| %>
+						<tr><td>
+							<%= link_to a.name, a.file_attachment_url, {:class => a.type} %>
+							<%= link_to "(delete)", a, {method: :delete, data: { confirm: "Are you sure?" }, :class => "delete-link"} %>
+						</td></tr>
+					<% end %>
+				</table>
+				<a href="#" class="modal-link" id="upload" name="upload">Upload a new attachment</a>
+				<div class="modal-box" name="upload">
+					<%= form_for @attachment do |at| %>
+						<%= at.file_field(:file_attachment) %>
+						<%= at.hidden_field :project_id, value: @project.id %>
+						<%= at.submit "Upload" %>
+						<%= button_tag "Cancel", :class => "modal-close", :type => "button" %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+		<div style="clear:both;"></div>
+		<div class="display-col display-project" id="timeline">
+			<h4>Project Interactions</h4>
+			<% @project.notes.order(:created_at).each do |note| %>
+				<div class="timeline-item note">
+					<% if note.user == current_user %>
+						<div class="identify"><span>You</span> made a note:</div>
+						<div class="controls">
+							<a href="#" class="modal-link" name="edit-note-<%= note.id %>">Edit</a>
+							<%= link_to 'Delete', note, method: :delete, data: { confirm: 'Are you sure?'} %>
+						</div>
+						<div class="modal-box" name="edit-note-<%= note.id %>">
+							<%= form_for note do |f| %>
+								<%= f.text_area :body, rows: "8", cols: "80" %>
+								<%= f.submit %>
+								<%= button_tag "Cancel", :class => "modal-close", :type => "button" %>
+							<% end %>
+						</div>
+					<% else %>
+						<div class="identify"><span><%= note.user.name %></span> made a note:</div>
+					<% end %>
+					<div class="body"><%= raw Kramdown::Document.new(note.body).to_html %></div>
+					<div class="date"><%= note.created_at.to_s(:friendly) %></div>
+				</div>
+			<% end %>
+			<% @project.emails.each do |email| %>
+				<div class="timeline-item note">
+						<div class="identify">Email from <span><%= email.from_address %></span></div>
+						<div class="controls">
+							<%= link_to 'Delete', email, method: :delete, data: { confirm: 'Are you sure?'} %>
+						</div>
+					<div class="body"><%= raw Kramdown::Document.new(email.body).to_html %></div>
+					<div class="date"><%= email.created_at.to_s(:friendly) %></div>
+				</div>
+			<% end %>	
+			<%= form_for @note do |f| %>
+				<%= f.text_area :body, rows: "6", cols: "80" %>
+				<%= f.hidden_field :project_id, value: @project.id %>
+				<%= f.submit %> 
+			<% end %>
+		</div>
+	</div>
+	<div class="col-right">
+		<div class="display-col display-project" id="items">
+			<h4>Items</h4>
+			<% @project.inventory_styles.distinct.each do |s| %>
+				<div class="inventory-style">
+					<div class="picture">
+						<% if s.picture_url %>
+							<%= image_tag s.picture_url if s.picture_url %>
+						<% else %>
+							<%= image_tag "image.png", {class: "no-picture"} %>
+						<% end %>
+					</div>
+					<div class="data">
+						<%= link_to s.name, inventory_style_path(s) %>
+						<table>
+							<tr>
+								<td class="key">Quantity</td>
+								<td><%= @project.inventory_items.where(inventory_style_id: s.id).count %></td>
+							</tr>
+							<tr>
+								<td class="key">Checked Out</td>
+								<td><%= InventoryItem.all.where(project_id: @project.id, inventory_style_id: s.id, status: "Checked Out").count %></td>
+							</tr>
+						</table>
+					</div>
+					<ul class="controls">
+						<li class="button">
+							<%= image_tag "add.png" %>
+							<%= link_to "Add One", project_items_path(project_item: {project_id: @project.id, inventory_style_id: s.id}), method: :post %>
+						</li>
+						<li class="button">
+							<%= image_tag "remove.png" %>
+							<% removable = @project.project_items.joins(inventory_item: :inventory_style).where(inventory_items: {inventory_style_id: s.id}).first %>
+							<%= link_to "Remove One", project_item_path(removable), method: :delete %>
+						</li>						
+						<li class="button">
+							<%= image_tag "magnifier.png" %>
+							<a href="#" class="modal-link" name="project-item-style-details-<%= s.id %>">Show Details</a>
+						</li>						
+						<li class="button">
+							<%= image_tag "cross.png" %>
+							<%= link_to "Remove All", remove_style_path(project_id: @project.id, inventory_style_id: s.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+						</li>					
+					</ul>
+					<div class="details modal-box" name="project-item-style-details-<%= s.id %>">
+						<table>
+							<thead>
+								<tr>
+									<th>Serial Number</th>
+									<th>Condition</th>
+									<th>Status</th>
+									<th></th>
+								</tr>
+							</thead>
+							<% @project.inventory_items.where(inventory_style_id: s.id).each do |i| %>
+								<tr>
+									<td><%= i.serial_number %></td>
+									<td><%= i.condition %></td>
+									<% if i.status == "Checked Out" && i.project == @project %>
+										<td><%= i.status %></td>
+										<td><%= link_to "Check In", inventory_item_path(i, inventory_item: {status: "Checked In", project_id: nil}), method: :patch %></td>
+									<% elsif i.status == "Checked Out" %>
+										<td><%= i.status %> (<%= link_to i.project.try(:name), i.project %>)</td>
+										<td></td>
+									<% else %>
+										<td><%= i.status %></td>
+										<td><%= link_to "Check Out", inventory_item_path(i, inventory_item: {status: "Checked Out", project_id: @project.id}), method: :patch %></td>
+									<% end %>
+								</tr>
+							<% end %>
+						</table>
+					</div>
+					<div style="clear:both;"></div>
+				</div>
+			<% end %>
+			<% if session[:project_id] == @project.id.to_s %>
+				<%= link_to "Stop using the basket tool", set_basket_path(nil), style: "color:blue;" %>
+			<% else %>
+				<%= link_to "Add items to this project with the basket tool", set_basket_path(project_id: @project.id), style: "color:blue;" %>
+			<% end %>
+		</div>
+	</div>
+</div>
+<div style="clear:both;"></div>

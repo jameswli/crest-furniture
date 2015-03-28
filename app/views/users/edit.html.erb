@@ -1,0 +1,11 @@
+<% title "Edit User" %>
+<% select_tab "Users" %>
+<% select_sub_tab "Edit User" %>
+
+<% sub_tabs do %>
+	<%= sub_tab "Display User", user_path(@user) %>
+	<%= sub_tab "Edit User", edit_user_path(@user) %>
+	<%= sub_tab "All Users", users_path %>
+<% end %> 
+
+<%= render 'form' %>
